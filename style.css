@@ -1,0 +1,28 @@
+*{
+    border-style: solid;
+    border-color: white;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gridContainer{
+    width: 480px;
+    height: 380px;
+    background-color: yellowgreen;
+}
+
+.grid{
+    background-color: aqua;
+    color: black;
+    max-width: fit-content;
+    float: left;
+}
+
+.gridMouseOver {
+    background-color: black;
+    border-color: black;
+}
