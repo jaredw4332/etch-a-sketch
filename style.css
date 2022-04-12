@@ -4,22 +4,41 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background-color: cadetblue;
 }
 
+.mainSection{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    ". header ."
+    "button sketch other"
+    "button sketch other";
+    justify-content: center;
+    gap: 1rem;
+}
+
+.mainHeader {
+    grid-area: header;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+}
+
 /* figure out how to set up some kind of loop to input rows and columns and fulfill
-criteria for up to 100x100 */
+criteria for up to 100x100 
+also the board breaks with anything other than 16 by 16*/
+
+
 
 .gridContainer{
+    grid-area: sketch;
     width: 500px;
     height: 500px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
 }
 
 .gridCell{
@@ -35,5 +54,29 @@ criteria for up to 100x100 */
 button {
     background-color: #dae4e5;
     border-radius: 5px;
-    margin: 10px;
+    width: 100px;
+    height: 50px;
+    font-size: large;
+
+}
+
+button:hover {
+    transform: scale(1.1);
+    filter: brightness(108%);
+}
+
+button:active {
+    filter: brightness(90%);
+    transform: scale(1.0);
+}
+
+.resetButton {
+    grid-area: other;
+}
+
+.leftButtons {
+    display: flex;
+    flex-direction: column;
+    grid-area: button;
+    gap: 20px;
 }
