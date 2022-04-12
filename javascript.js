@@ -1,13 +1,11 @@
-// create multiple divs
-// set divs as certain background color when clicked or mouse hovers or hovered while-
-// -mouse clicking
-
 const gridContainer = document.querySelector('.gridContainer')
+const mainSection = document.querySelector('.mainSection')
+const leftButtons = document.querySelector('.leftButtons')
 
 for(let i = 0; i < 256; i++){
     let gridPiece = document.createElement('div')
-    gridPiece.classList.add('grid')
-    gridPiece.addEventListener('mouseover', gridMouseOver, true)
+    gridPiece.classList.add('gridCell')
+    gridPiece.addEventListener('mouseover', gridMouseOver)
     gridContainer.appendChild(gridPiece)
 
 
@@ -19,7 +17,20 @@ for(let i = 0; i < 256; i++){
 let resetButton = document.createElement('button')
 resetButton.addEventListener('click', resetGrid)
 resetButton.textContent = 'Clear'
-document.body.appendChild(resetButton)
+resetButton.classList.add('resetButton')
+mainSection.appendChild(resetButton)
+
+let rainbowButton = document.createElement('button')
+//rainbowButton.addEventListener('click', rainbow colour function)
+rainbowButton.textContent = 'Rainbow'
+rainbowButton.classList.add('rainbowButton')
+leftButtons.appendChild(rainbowButton)
+
+let fadeButton = document.createElement('button')
+//fadeButton.addEventListener('click', fading colour function)
+fadeButton.textContent = 'Fade'
+fadeButton.classList.add('fadeButton')
+leftButtons.appendChild(fadeButton)
 
 function resetGrid(){
     let gridColored = document.querySelectorAll('.gridMouseOver')
