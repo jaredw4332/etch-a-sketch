@@ -79,10 +79,11 @@ function rainbowColorGenerator() {
 function resizeGrid() {
     let gridSize = prompt("Enter a number between 1 and 100");
     if (Number(gridSize) && (gridSize > 0) && (gridSize < 101)) {
-        document.getElementById("gridContainer").style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
-        document.getElementById("gridContainer").style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+        gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
+        gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
+        resetGrid()
     }
     else{
-        console.log('no')
+        alert("Invalid entry. Please try again.")
     }
 }
