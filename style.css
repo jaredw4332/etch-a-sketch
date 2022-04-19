@@ -59,6 +59,11 @@ button:active {
     transform: scale(1.0);
 }
 
+.activeButton {
+    color: #dae4e5;
+    background-color: blueviolet;
+}
+
 .buttons {
     display: flex;
     flex-direction: column;
