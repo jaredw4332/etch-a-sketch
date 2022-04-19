@@ -76,15 +76,26 @@ buttons.appendChild(resizeButton)
 
 function blackColor(){
     mode = 'black'
+    blackButton.classList.add('activeButton')
+    rainbowButton.classList.remove('activeButton')
+    fadeButton.classList.remove('activeButton')
 }
 
 function rainbowColorActivator(){
     mode = 'rainbow'
+    rainbowButton.classList.add('activeButton')
+    fadeButton.classList.remove('activeButton')
+    blackButton.classList.remove('activeButton')
 }
 
 function fadeColor(){
     mode = 'fade'
+    fadeButton.classList.add('activeButton')
+    rainbowButton.classList.remove('activeButton')
+    blackButton.classList.remove('activeButton')
 }
+
+blackButton.classList.add('activeButton')
 
 function resetGrid(){
     let gridCell = document.querySelectorAll('.gridCell')
@@ -127,16 +138,3 @@ function resizeGrid() {
         alert("Invalid entry. Please try again.")
     }
 }
-
-/* for fade
-construct IDs and colours based on if statements 
-ex: if cell is white, make class with 10% black
-if cell is 10% black, make 20% and so on and so forth
-
-also may be worth setting making every colouring work like rainbow color does,
-and encompass it in one big function so it's all just activating modes and what
-not
-
-button will set mode, then main function will see the mode and colour based on that
-basically, a Mother Function
-*/
