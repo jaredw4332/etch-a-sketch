@@ -1,20 +1,28 @@
 const gridContainer = document.querySelector('.gridContainer')
 const mainSection = document.querySelector('.mainSection')
 const buttons = document.querySelector('.buttons')
-let mode = 'black'
 
-function gridMouseOver(){
-    gridPiece.classList.add('gridMouseOver')
-}
+let mode = 'black'
 
 for(let i = 0; i < 10000; i++){
     let gridPiece = document.createElement('div')
     gridPiece.classList.add('gridCell')
-    gridPiece.addEventListener('mouseover', gridMouseOver)
+    gridPiece.addEventListener('mouseover', gridCellPen)
     gridContainer.appendChild(gridPiece)
+}
 
-    function gridMouseOver(){
-        gridPiece.classList.add('gridMouseOver')
+function gridCellPen(){
+    if (mode == 'black'){
+        this.style.backgroundColor = 'black'
+    } 
+    else if (mode == 'rainbow'){
+        this.style.backgroundColor = randomHexColor()
+    }
+    else if (mode == 'fade'){
+
+    } 
+    else {
+        return
     }
 }
 
@@ -50,27 +58,20 @@ buttons.appendChild(resizeButton)
 
 function blackColor(){
     mode = 'black'
-    let gridPiece = document.getElementsByClassName('gridCell')
-    for (let i = 0; i < gridPiece.length; i++){
-        gridPiece[i].addEventListener('mouseover', blackColorPen)
-    }
+}
 
-    function blackColorPen() {
-        if (mode != 'black'){
-            return
-        }
-        else {
-        this.style.backgroundColor = 'black'
-        }
-    }
+function rainbowColorActivator(){
+    mode = 'rainbow'
+}
+
+function fadeColor(){
+    mode = 'fade'
 }
 
 function resetGrid(){
-    let gridColored = document.querySelectorAll('.gridMouseOver')
-    for (let i = 0; i < gridColored.length; i++){
-        gridColored[i].classList.remove('gridMouseOver')
-        gridColored[i].removeAttribute('id')
-        gridColored[i].removeAttribute('style')
+    let gridCell = document.querySelectorAll('.gridCell')
+    for (let i = 0; i < gridCell.length; i++){
+        gridCell[i].style.backgroundColor = 'white'
     }
 }
 
@@ -104,36 +105,6 @@ function resizeGrid() {
     }
     else{
         alert("Invalid entry. Please try again.")
-    }
-}
-
-let rainbowColored = 0
-
-function rainbowColorActivator(){
-    mode = 'rainbow'
-    let gridPiece = document.getElementsByClassName('gridCell')
-    for (let i = 0; i < gridPiece.length; i++){
-        gridPiece[i].addEventListener('mouseover', rainbowColorGenerator)
-    }
-
-    function rainbowColorGenerator() {
-        if (mode != 'rainbow'){
-            return
-        }
-        else {
-        this.id = `rainbowCell${rainbowColored}`
-        let rainbowCell = document.getElementById(this.id)
-        rainbowCell.style.backgroundColor = randomHexColor()
-        rainbowColored += 1
-        }
-    }
-}
-
-function fadeColor(){
-    mode = 'fade'
-    let gridPiece = document.getElementsByClassName('gridCell')
-    for (let i = 0; i < gridPiece.length; i++){
-        gridPiece[i].addEventListener('mouseover', rainbowColorGenerator)
     }
 }
 
