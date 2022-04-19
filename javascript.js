@@ -1,6 +1,7 @@
 const gridContainer = document.querySelector('.gridContainer')
 const mainSection = document.querySelector('.mainSection')
 const buttons = document.querySelector('.buttons')
+let mode = 'black'
 
 function gridMouseOver(){
     gridPiece.classList.add('gridMouseOver')
@@ -23,6 +24,12 @@ resetButton.textContent = 'Clear'
 resetButton.classList.add('resetButton')
 buttons.appendChild(resetButton)
 
+let blackButton = document.createElement('button')
+blackButton.addEventListener('click', blackColor)
+blackButton.textContent = 'Black'
+blackButton.classList.add('blackButton')
+buttons.appendChild(blackButton)
+
 let rainbowButton = document.createElement('button')
 rainbowButton.addEventListener('click', rainbowColorActivator)
 rainbowButton.textContent = 'Rainbow'
@@ -41,13 +48,29 @@ resizeButton.textContent = 'Resize Grid'
 resizeButton.classList.add('resizeButton')
 buttons.appendChild(resizeButton)
 
+function blackColor(){
+    mode = 'black'
+    let gridPiece = document.getElementsByClassName('gridCell')
+    for (let i = 0; i < gridPiece.length; i++){
+        gridPiece[i].addEventListener('mouseover', blackColorPen)
+    }
+
+    function blackColorPen() {
+        if (mode != 'black'){
+            return
+        }
+        else {
+        this.style.backgroundColor = 'black'
+        }
+    }
+}
+
 function resetGrid(){
     let gridColored = document.querySelectorAll('.gridMouseOver')
     for (let i = 0; i < gridColored.length; i++){
         gridColored[i].classList.remove('gridMouseOver')
         gridColored[i].removeAttribute('id')
         gridColored[i].removeAttribute('style')
-
     }
 }
 
@@ -87,18 +110,42 @@ function resizeGrid() {
 let rainbowColored = 0
 
 function rainbowColorActivator(){
+    mode = 'rainbow'
     let gridPiece = document.getElementsByClassName('gridCell')
     for (let i = 0; i < gridPiece.length; i++){
         gridPiece[i].addEventListener('mouseover', rainbowColorGenerator)
     }
 
     function rainbowColorGenerator() {
+        if (mode != 'rainbow'){
+            return
+        }
+        else {
         this.id = `rainbowCell${rainbowColored}`
         let rainbowCell = document.getElementById(this.id)
         rainbowCell.style.backgroundColor = randomHexColor()
         rainbowColored += 1
+        }
     }
 }
 
-/* need to assign unique id to each particular div hovered over 
-then assign a random color to that id */
+function fadeColor(){
+    mode = 'fade'
+    let gridPiece = document.getElementsByClassName('gridCell')
+    for (let i = 0; i < gridPiece.length; i++){
+        gridPiece[i].addEventListener('mouseover', rainbowColorGenerator)
+    }
+}
+
+/* for fade
+construct IDs and colours based on if statements 
+ex: if cell is white, make class with 10% black
+if cell is 10% black, make 20% and so on and so forth
+
+also may be worth setting making every colouring work like rainbow color does,
+and encompass it in one big function so it's all just activating modes and what
+not
+
+button will set mode, then main function will see the mode and colour based on that
+basically, a Mother Function
+*/
