@@ -12,9 +12,9 @@ body {
     grid-template-columns: auto;
     grid-template-rows: auto;
     grid-template-areas: 
-    ". header ."
-    "button sketch other"
-    "button sketch other";
+    "header header"
+    "button sketch"
+    "button sketch";
     justify-content: center;
     gap: 1rem;
 }
@@ -26,13 +26,9 @@ body {
     justify-content: center;
 }
 
-/* figure out how to set up some kind of loop to input rows and columns and fulfill
-criteria for up to 100x100 
-also the board breaks with anything other than 16 by 16*/
-
-
-
 .gridContainer{
+    border-style: solid;
+    border-color: rgb(178, 207, 211);
     grid-area: sketch;
     width: 500px;
     height: 500px;
@@ -43,12 +39,6 @@ also the board breaks with anything other than 16 by 16*/
 
 .gridCell{
     background-color: white;
-    color: white;
-}
-
-.gridMouseOver {
-    background-color: black;
-    color: black;
 }
 
 button {
@@ -57,7 +47,6 @@ button {
     width: 100px;
     height: 50px;
     font-size: large;
-
 }
 
 button:hover {
@@ -70,11 +59,7 @@ button:active {
     transform: scale(1.0);
 }
 
-.resetButton {
-    grid-area: other;
-}
-
-.leftButtons {
+.buttons {
     display: flex;
     flex-direction: column;
     grid-area: button;
