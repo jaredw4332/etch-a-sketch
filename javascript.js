@@ -19,7 +19,25 @@ function gridCellPen(){
         this.style.backgroundColor = randomHexColor()
     }
     else if (mode == 'fade'){
-
+        if (this.classList.contains('fadeFour')){
+            this.style.filter = `brightness(0%)`
+        }
+        else if (this.classList.contains('fadeThree')){
+            this.style.filter = `brightness(20%)`
+            this.classList.add('fadeFour')
+        }
+        else if (this.classList.contains('fadeTwo')){
+            this.style.filter = `brightness(40%)`
+            this.classList.add('fadeThree')
+        }
+        else if (this.classList.contains('fadeOne')){
+            this.style.filter = `brightness(60%)`
+            this.classList.add('fadeTwo')
+        }
+        else if (this.classList.contains('gridCell')){
+            this.style.filter = `brightness(80%)`
+            this.classList.add('fadeOne')
+        }
     } 
     else {
         return
@@ -45,7 +63,7 @@ rainbowButton.classList.add('rainbowButton')
 buttons.appendChild(rainbowButton)
 
 let fadeButton = document.createElement('button')
-//fadeButton.addEventListener('click', fading colour function)
+fadeButton.addEventListener('click', fadeColor)
 fadeButton.textContent = 'Fade'
 fadeButton.classList.add('fadeButton')
 buttons.appendChild(fadeButton)
@@ -72,6 +90,8 @@ function resetGrid(){
     let gridCell = document.querySelectorAll('.gridCell')
     for (let i = 0; i < gridCell.length; i++){
         gridCell[i].style.backgroundColor = 'white'
+        gridCell[i].style.filter = 'brightness(100%)'
+        gridCell[i].classList.remove('fadeOne', 'fadeTwo', 'fadeThree', 'fadeFour')
     }
 }
 
