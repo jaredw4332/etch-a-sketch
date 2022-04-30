@@ -138,3 +138,7 @@ function resizeGrid() {
         alert("Invalid entry. Please try again.")
     }
 }
+
+function playAudio(url) {
+    new Audio(url).play();
+  }
