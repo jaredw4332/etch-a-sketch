@@ -38,7 +38,11 @@ function gridCellPen(){
             this.style.filter = `brightness(80%)`
             this.classList.add('fadeOne')
         }
-    } 
+    }
+    else if (mode == 'custom'){
+        let chosenColor = document.getElementById("colorSelector").value
+        this.style.backgroundColor = chosenColor
+    }
     else {
         return
     }
@@ -74,11 +78,24 @@ resizeButton.textContent = 'Resize Grid'
 resizeButton.classList.add('resizeButton')
 buttons.appendChild(resizeButton)
 
+let customColorButton = document.createElement('button')
+customColorButton.addEventListener('click', customColor)
+customColorButton.textContent = 'Custom Color'
+customColorButton.classList.add('customColorButton')
+buttons.appendChild(customColorButton)
+
+let customColorSelector = document.createElement('input')
+customColorSelector.setAttribute("type", "color")
+customColorSelector.setAttribute("name", "colorSelector")
+customColorSelector.setAttribute("id", "colorSelector")
+buttons.appendChild(customColorSelector)
+
 function blackColor(){
     mode = 'black'
     blackButton.classList.add('activeButton')
     rainbowButton.classList.remove('activeButton')
     fadeButton.classList.remove('activeButton')
+    customColorButton.classList.remove('activeButton')
 }
 
 function rainbowColorActivator(){
@@ -86,11 +103,21 @@ function rainbowColorActivator(){
     rainbowButton.classList.add('activeButton')
     fadeButton.classList.remove('activeButton')
     blackButton.classList.remove('activeButton')
+    customColorButton.classList.remove('activeButton')
 }
 
 function fadeColor(){
     mode = 'fade'
     fadeButton.classList.add('activeButton')
+    rainbowButton.classList.remove('activeButton')
+    blackButton.classList.remove('activeButton')
+    customColorButton.classList.remove('activeButton')
+}
+
+function customColor(){
+    mode = 'custom'
+    customColorButton.classList.add('activeButton')
+    fadeButton.classList.remove('activeButton')
     rainbowButton.classList.remove('activeButton')
     blackButton.classList.remove('activeButton')
 }
