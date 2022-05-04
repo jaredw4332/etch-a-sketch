@@ -15,6 +15,7 @@ body {
     "header header"
     "button sketch"
     "button sketch"
+    "slider slider"
     "footer footer";
     justify-content: center;
     gap: 1rem;
@@ -68,6 +69,8 @@ button:active {
 .buttons {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+    align-items: center;
     grid-area: button;
     gap: 20px;
 }
@@ -94,4 +97,36 @@ button:active {
     transform: rotate(-80deg);
     transition: 0.2s;
     margin-left: 0px;
+}
+
+#colorSelector {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+}
+
+#colorSelector:hover {
+    transform: scale(1.2);
+}
+
+.slideContainer {
+    grid-area: slider;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.gridOutput {
+    width: 90px;
+    font-size: 20px;
+}
+
+#gridSizeSlider {
+    grid-area: footer;
+    width: 400px;
+    accent-color: #8a2be2;
+}
+
+input::-webkit-color-swatch {
+    border: none;
 }
