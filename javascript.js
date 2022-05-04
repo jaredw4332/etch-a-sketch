@@ -72,12 +72,6 @@ fadeButton.textContent = 'Fade'
 fadeButton.classList.add('fadeButton')
 buttons.appendChild(fadeButton)
 
-let resizeButton = document.createElement('button')
-resizeButton.addEventListener('click', resizeGrid)
-resizeButton.textContent = 'Resize Grid'
-resizeButton.classList.add('resizeButton')
-buttons.appendChild(resizeButton)
-
 let customColorButton = document.createElement('button')
 customColorButton.addEventListener('click', customColor)
 customColorButton.textContent = 'Custom Color'
@@ -154,18 +148,21 @@ function randomHexColor() {
     return "#" + hr + hg + hb;
 }
 
-function resizeGrid() {
-    let gridSize = prompt("Enter a number between 1 and 100");
-    if (Number(gridSize) && (gridSize > 0) && (gridSize < 101)) {
-        gridContainer.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`
-        gridContainer.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`
-        resetGrid()
-    }
-    else{
-        alert("Invalid entry. Please try again.")
-    }
-}
 
 function playAudio(url) {
     new Audio(url).play();
-  }
+}
+
+const gridSize = document.querySelector('#gridSize')
+const output = document.querySelector('.gridOutput')
+output.textContent = `${gridSize.value} x ${gridSize.value}`
+
+gridSize.addEventListener('input', function() {
+    output.textContent = `${gridSize.value} x ${gridSize.value}`;
+});
+
+gridSize.addEventListener('change', function() {
+    gridContainer.style.gridTemplateRows = `repeat(${gridSize.value}, 1fr)`
+    gridContainer.style.gridTemplateColumns = `repeat(${gridSize.value}, 1fr)`
+    resetGrid()
+});
