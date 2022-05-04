@@ -2,7 +2,7 @@ const gridContainer = document.querySelector('.gridContainer')
 const mainSection = document.querySelector('.mainSection')
 const buttons = document.querySelector('.buttons')
 
-let mode = 'black'
+let mode = 'custom'
 
 for(let i = 0; i < 10000; i++){
     let gridPiece = document.createElement('div')
@@ -12,13 +12,14 @@ for(let i = 0; i < 10000; i++){
 }
 
 function gridCellPen(){
-    if (mode == 'black'){
-        this.style.backgroundColor = 'black'
+    if (mode == 'custom'){
+        let chosenColor = document.getElementById("colorSelector").value
+        this.style.backgroundColor = chosenColor
     } 
-    else if (mode == 'rainbow'){
+    if (mode == 'rainbow'){
         this.style.backgroundColor = randomHexColor()
     }
-    else if (mode == 'fade'){
+    if (mode == 'fade'){
         if (this.classList.contains('fadeFour')){
             this.style.filter = `brightness(0%)`
         }
@@ -39,64 +40,47 @@ function gridCellPen(){
             this.classList.add('fadeOne')
         }
     }
-    else if (mode == 'custom'){
-        let chosenColor = document.getElementById("colorSelector").value
-        this.style.backgroundColor = chosenColor
-    }
-    else {
-        return
-    }
 }
 
-let resetButton = document.createElement('button')
-resetButton.addEventListener('click', resetGrid)
-resetButton.textContent = 'Clear'
-resetButton.classList.add('resetButton')
-buttons.appendChild(resetButton)
+const customColorSelector = document.createElement('input')
+customColorSelector.setAttribute("type", "color")
+customColorSelector.setAttribute("name", "colorSelector")
+customColorSelector.setAttribute("id", "colorSelector")
+customColorSelector.style.backgroundColor = 'black'
+buttons.appendChild(customColorSelector)
 
-let blackButton = document.createElement('button')
-blackButton.addEventListener('click', blackColor)
-blackButton.textContent = 'Black'
-blackButton.classList.add('blackButton')
-buttons.appendChild(blackButton)
+const customColorButton = document.createElement('button')
+customColorButton.addEventListener('click', customColor)
+customColorButton.textContent = 'Color'
+customColorButton.classList.add('customColorButton')
+buttons.appendChild(customColorButton)
 
-let rainbowButton = document.createElement('button')
+const rainbowButton = document.createElement('button')
 rainbowButton.addEventListener('click', rainbowColorActivator)
 rainbowButton.textContent = 'Rainbow'
 rainbowButton.classList.add('rainbowButton')
 buttons.appendChild(rainbowButton)
 
-let fadeButton = document.createElement('button')
+const fadeButton = document.createElement('button')
 fadeButton.addEventListener('click', fadeColor)
 fadeButton.textContent = 'Fade'
 fadeButton.classList.add('fadeButton')
 buttons.appendChild(fadeButton)
 
-let customColorButton = document.createElement('button')
-customColorButton.addEventListener('click', customColor)
-customColorButton.textContent = 'Custom Color'
-customColorButton.classList.add('customColorButton')
-buttons.appendChild(customColorButton)
+const resetButton = document.createElement('button')
+resetButton.addEventListener('click', resetGrid)
+resetButton.textContent = 'Clear'
+resetButton.classList.add('resetButton')
+buttons.appendChild(resetButton)
 
-let customColorSelector = document.createElement('input')
-customColorSelector.setAttribute("type", "color")
-customColorSelector.setAttribute("name", "colorSelector")
-customColorSelector.setAttribute("id", "colorSelector")
-buttons.appendChild(customColorSelector)
-
-function blackColor(){
-    mode = 'black'
-    blackButton.classList.add('activeButton')
-    rainbowButton.classList.remove('activeButton')
-    fadeButton.classList.remove('activeButton')
-    customColorButton.classList.remove('activeButton')
-}
+customColorSelector.addEventListener("input", function (){
+    customColorSelector.style.backgroundColor = customColorSelector.value
+})
 
 function rainbowColorActivator(){
     mode = 'rainbow'
     rainbowButton.classList.add('activeButton')
     fadeButton.classList.remove('activeButton')
-    blackButton.classList.remove('activeButton')
     customColorButton.classList.remove('activeButton')
 }
 
@@ -104,7 +88,6 @@ function fadeColor(){
     mode = 'fade'
     fadeButton.classList.add('activeButton')
     rainbowButton.classList.remove('activeButton')
-    blackButton.classList.remove('activeButton')
     customColorButton.classList.remove('activeButton')
 }
 
@@ -113,10 +96,9 @@ function customColor(){
     customColorButton.classList.add('activeButton')
     fadeButton.classList.remove('activeButton')
     rainbowButton.classList.remove('activeButton')
-    blackButton.classList.remove('activeButton')
 }
 
-blackButton.classList.add('activeButton')
+customColorButton.classList.add('activeButton')
 
 function resetGrid(){
     let gridCell = document.querySelectorAll('.gridCell')
@@ -148,12 +130,7 @@ function randomHexColor() {
     return "#" + hr + hg + hb;
 }
 
-
-function playAudio(url) {
-    new Audio(url).play();
-}
-
-const gridSize = document.querySelector('#gridSize')
+const gridSize = document.querySelector('#gridSizeSlider')
 const output = document.querySelector('.gridOutput')
 output.textContent = `${gridSize.value} x ${gridSize.value}`
 
@@ -166,3 +143,7 @@ gridSize.addEventListener('change', function() {
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize.value}, 1fr)`
     resetGrid()
 });
+
+function playAudio(url) {
+    new Audio(url).play();
+}
