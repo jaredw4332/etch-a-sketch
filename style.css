@@ -89,14 +89,18 @@ button:active {
     width: 20px;
     vertical-align: text-top;
     margin-left: 2px;
-    transition: transform 999s;
+    transition: transform 500s;
     filter: invert(24%) sepia(67%) saturate(5698%) hue-rotate(266deg) brightness(90%) contrast(96%);
 }
 
+#github:hover {
+    transform: rotate(-555555deg);
+    transition: 999s;
+}
+
 #github:active {
-    transform: rotate(-80deg);
-    transition: 0.2s;
-    margin-left: 0px;
+    transform: rotate(-15000deg);
+    transition: 5s;
 }
 
 #colorSelector {
