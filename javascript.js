@@ -143,7 +143,3 @@ gridSize.addEventListener('change', function() {
     gridContainer.style.gridTemplateColumns = `repeat(${gridSize.value}, 1fr)`
     resetGrid()
 });
-
-function playAudio(url) {
-    new Audio(url).play();
-}
